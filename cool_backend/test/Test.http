@@ -1,0 +1,12 @@
+GET http://localhost:30000/stations
+
+
+###sfsafaf####
+POST http://localhost:30000/stations
+Content-Type: application/json
+
+{
+  "name": "Gratkorn",
+  "kategorie": "Ort",
+  "temperaturen": [-10, -5, 1, 5, -3, -9]
+}
