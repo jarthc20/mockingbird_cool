@@ -1,7 +1,10 @@
 import express, {Request, Response, Router} from "express";
 import {IStation} from "../src/common/IStation";
-import {mockdata} from "../mockdata/mockdata";
-import {getStations, insertMockStations, insertWeatherStation} from "../db/Station.sb";
+import {mockdataSongs} from "../mockdata/mockdataSongs";
+import {getSongs, insertSong} from "../db/Song.db";
+import {ISong} from "../src/common/ISong";
+import {IPlaylist} from "../src/common/IPlaylist";
+import {getPlaylist, insertPlaylist} from "../db/Playlist.db";
 
 let router: Router = express.Router();
 
@@ -9,8 +12,8 @@ router.get('/', (request: Request, response: Response) => {
     const sortParam: string | undefined = request.query.sortBy as string;
     const filterParam: string|undefined = request.query.filterBy as string;
 
-    getStations().then((sortedData: IStation[]) => {
-        switch (sortParam) {
+    getPlaylist().then((sortedData: IPlaylist[]) => {
+        /*switch (sortParam) {
             case "name":
                 sortedData.sort((a, b) => a.name.localeCompare(b.name));
                 break;
@@ -32,15 +35,17 @@ router.get('/', (request: Request, response: Response) => {
                 sortedData = sortedData;
                 break;
         }
+
+         */
         response.send(sortedData);
     })
 })
 
 router.post('/', (request:Request, response:Response) => {
-    const station:IStation = request.body as IStation;
+    const playlist:IPlaylist = request.body as IPlaylist;
 
-    insertWeatherStation(station).then(() => {
-        response.location(request.url+`/${station.name}`).status(201).send(station)
+    insertPlaylist(playlist).then(() => {
+        response.location(request.url+`/${playlist.name}`).status(201).send(playlist)
     }).catch((error) => {
         response.status(409).send(error)
     })

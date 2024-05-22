@@ -5,7 +5,8 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var stationRouter = require('./routes/stations');
+var songRouter = require('./routes/songs');
+var playlistRouter = require('./routes/playlists');
 var cors = require('cors')
 
 var app = express();
@@ -25,12 +26,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/stations', stationRouter);
+app.use('/songs', songRouter);
+app.use('/playlists', playlistRouter);
 
 const {initMongoConnect} = require('./db/util.model.db');
-const {insertMockStations} = require('./db/Station.sb');
+const {insertMockSongs} = require('./db/Song.db');
+const {insertMockPlaylist} = require('./db/Playlist.db');
 initMongoConnect().then(() => {
-    insertMockStations().then();
+    insertMockSongs().then();
+    insertMockPlaylist().then();
 })
 
 module.exports = app;

@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.initMongoConnect = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
-const DB_URL = "mongodb://127.0.0.1:27017/mystationsdb";
+const DB_URL = "mongodb://127.0.0.1:27017/mockingbird_db";
 const initMongoConnect = () => __awaiter(void 0, void 0, void 0, function* () {
     yield mongoose_1.default.connect(DB_URL);
 });

@@ -4,13 +4,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const Station_sb_1 = require("../db/Station.sb");
+const Song_db_1 = require("../db/Song.db");
 let router = express_1.default.Router();
 router.get('/', (request, response) => {
     const sortParam = request.query.sortBy;
     const filterParam = request.query.filterBy;
-    (0, Station_sb_1.getStations)().then((sortedData) => {
-        switch (sortParam) {
+    (0, Song_db_1.getSongs)().then((sortedData) => {
+        /*switch (sortParam) {
             case "name":
                 sortedData.sort((a, b) => a.name.localeCompare(b.name));
                 break;
@@ -18,9 +18,9 @@ router.get('/', (request, response) => {
                 sortedData.sort((a, b) => a.kategorie.localeCompare(b.kategorie));
                 break;
         }
-        switch (filterParam) {
+        switch (filterParam){
             case "Berg":
-                sortedData = sortedData.filter((station) => station.kategorie.includes("Berg"));
+                sortedData= sortedData.filter((station) => station.kategorie.includes("Berg"));
                 break;
             case "Ort":
                 sortedData = sortedData.filter((station) => station.kategorie.includes("Ort"));
@@ -32,13 +32,15 @@ router.get('/', (request, response) => {
                 sortedData = sortedData;
                 break;
         }
+
+         */
         response.send(sortedData);
     });
 });
 router.post('/', (request, response) => {
-    const station = request.body;
-    (0, Station_sb_1.insertWeatherStation)(station).then(() => {
-        response.location(request.url + `/${station.name}`).status(201).send(station);
+    const song = request.body;
+    (0, Song_db_1.insertSong)(song).then(() => {
+        response.location(request.url + `/${song.songName}`).status(201).send(song);
     }).catch((error) => {
         response.status(409).send(error);
     });

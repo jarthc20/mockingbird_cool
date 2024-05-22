@@ -1,12 +1,11 @@
-GET http://localhost:30000/stations
+GET http://localhost:30000/songs
 
 
 ###sfsafaf####
-POST http://localhost:30000/stations
+POST http://localhost:30000/songs
 Content-Type: application/json
 
 {
-  "name": "Gratkorn",
-  "kategorie": "Ort",
-  "temperaturen": [-10, -5, 1, 5, -3, -9]
+  "songName": "dwaddddddd",
+  "authorName": "delle"
 }
