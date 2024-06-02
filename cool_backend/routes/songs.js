@@ -8,7 +8,6 @@ const Song_db_1 = require("../db/Song.db");
 let router = express_1.default.Router();
 router.get('/all', (request, response) => {
     const byPlaylist = request.query.byPlaylist;
-    const filterParam = request.query.filterBy;
     if (byPlaylist) {
         (0, Song_db_1.getSongsByPlaylistId)(byPlaylist).then(songs => response.send(songs));
     }
@@ -24,6 +23,16 @@ router.post('/', (request, response) => {
         response.location(request.url + `/${song.songName}`).status(201).send(song);
     }).catch((error) => {
         response.status(409).send(error);
+    });
+});
+router.post('/addToPlaylist', (request, response) => {
+    const song = request.body;
+    const playlist = request.query.playlist;
+    (0, Song_db_1.addSongToPlaylist)(song._id, playlist).then(song => {
+        if (song) {
+            response.status(201).send(song);
+        }
+        response.status(404).send();
     });
 });
 module.exports = router;

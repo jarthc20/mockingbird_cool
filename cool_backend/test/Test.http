@@ -1,11 +1,30 @@
-GET http://localhost:30000/songs
+GET http://localhost:30000/songs/all
 
+
+###daad####
+GET http://localhost:30000/playlists/all
 
 ###sfsafaf####
-POST http://localhost:30000/songs
+POST http://localhost:30000/playlists
 Content-Type: application/json
 
 {
-  "songName": "dwaddddddd",
-  "authorName": "delle"
+  "name": "wdawda",
+  "desc": "edd"
 }
+
+
+###dadd####
+POST http://localhost:30000/songs/addToPlaylist?playlist=undefined
+Content-Type: application/json
+
+{
+  "_id": "665c30d12d38506dbbafbaf5",
+  "songName": "ich bin cool",
+  "authorName": "Adelle",
+  "src": "https",
+  "__v": 0
+}
+
+###daad####
+GET http://localhost:30000/songs/all?byPlaylist=665c30b92d38506dbbafbae3

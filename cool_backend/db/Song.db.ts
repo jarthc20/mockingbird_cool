@@ -25,3 +25,10 @@ export const getSongsByPlaylistId = async (playlist:string):Promise<ISong[]> => 
     const songsRe = await getSongs().then(songs => songs.filter(song=> song.playlist === playlist));
     return songsRe;
 }
+
+
+export const addSongToPlaylist = async (song:string,playlist:string|undefined):Promise<ISong|null> => {
+    const songsRe = await Song.findByIdAndUpdate(song,{playlist:playlist});
+    return songsRe;
+}
+
