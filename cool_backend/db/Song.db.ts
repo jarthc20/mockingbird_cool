@@ -20,3 +20,8 @@ export const getSongs = async ():Promise<ISong[]> => {
     const songsCool = await Song.find();
     return songsCool;
 }
+
+export const getSongsByPlaylistId = async (playlist:string):Promise<ISong[]> => {
+    const songsRe = await getSongs().then(songs => songs.filter(song=> song.playlist === playlist));
+    return songsRe;
+}

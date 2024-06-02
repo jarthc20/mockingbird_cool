@@ -28,5 +28,7 @@ const mongoose = __importStar(require("mongoose"));
 exports.SongsSchema = new mongoose.Schema({
     songName: String,
     authorName: String,
+    src: String,
+    playlist: String
 });
 exports.Song = mongoose.model('Song', exports.SongsSchema);

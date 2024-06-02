@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getSongs = exports.insertSong = exports.insertMockSongs = void 0;
+exports.getSongsByPlaylistId = exports.getSongs = exports.insertSong = exports.insertMockSongs = void 0;
 const mockdataSongs_1 = require("../mockdata/mockdataSongs");
 const Song_model_db_1 = require("./Song.model.db");
 const insertMockSongs = () => __awaiter(void 0, void 0, void 0, function* () {
@@ -27,3 +27,8 @@ const getSongs = () => __awaiter(void 0, void 0, void 0, function* () {
     return songsCool;
 });
 exports.getSongs = getSongs;
+const getSongsByPlaylistId = (playlist) => __awaiter(void 0, void 0, void 0, function* () {
+    const songsRe = yield (0, exports.getSongs)().then(songs => songs.filter(song => song.playlist === playlist));
+    return songsRe;
+});
+exports.getSongsByPlaylistId = getSongsByPlaylistId;

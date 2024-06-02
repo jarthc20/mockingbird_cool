@@ -7,6 +7,8 @@ export const SongsSchema = new mongoose.Schema<ISong>(
     {
         songName: String,
         authorName: String,
+        src: String,
+        playlist: String
     }
 );
 

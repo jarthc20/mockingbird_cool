@@ -8,7 +8,7 @@ import {Song, SongsSchema} from "./Song.model.db";
 export const PlaylistSchema = new mongoose.Schema<IPlaylist>(
     {
         name: String,
-        songs: [String]
+        desc: String
     }
 );
 
