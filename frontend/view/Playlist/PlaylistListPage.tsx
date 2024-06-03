@@ -27,7 +27,7 @@ const PlaylistListPage: React.FC = () => {
         if (!newPlaylistName.trim()) return;
 
         const newPlaylist = {
-            id: (playlists?.length || 0 + 1).toString(),  // Assuming id is a string
+            id: (playlists?.length || 0 + 1).toString(),  
             name: newPlaylistName,
             songs: [],
         };
