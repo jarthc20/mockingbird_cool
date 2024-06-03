@@ -2,8 +2,8 @@ import React from 'react';
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {Image} from "react-native";
 import Home from "./Home";
-import Songs from "./Songs";
-import Playlists from "./Playlists";
+import Songs from "./Song/Songs";
+import Playlists from "./Playlist/Playlists";
 
 
 
@@ -33,6 +33,7 @@ const BottomTabBar = () => {
                     <Image source={require('../assets/adaptive-icon.png')} style={{width:30, height:30}}/>
                 )
             }}/>
+
 
         </Tab.Navigator>
     );

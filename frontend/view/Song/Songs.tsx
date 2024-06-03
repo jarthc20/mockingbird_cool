@@ -1,12 +1,22 @@
-import React, {useState} from 'react';
-import {ScrollView, Text} from "react-native";
+import React, {useEffect, useState} from 'react';
+import {FlatList, ScrollView, Text} from "react-native";
 import SongListPage from "./SongListPage";
-import {ISong, mockSongs} from "../models/ISong";
+import {ISong, mockSongs} from "../../models/ISong";
 import {SearchBar} from "react-native-elements";
+import {usePlaylistContext} from "../../context/PlaylistContext";
 
 const Songs = () => {
     const [songs, setSongs] = useState<ISong[]>(mockSongs);
     const [searchString, setSearchString] = useState<String>("");
+    const {selectedPlaylist,setSelectedPlaylist} = usePlaylistContext();
+
+    useEffect(() => {
+        setSelectedPlaylist({
+            "id": "1",
+            "name": "My Playlist",
+            "songs": ["Song 1", "Song 2", "Song 3"]
+        });
+    }, []);
 
     const updateSearch = (search: string) => {
         setSearchString(search);
@@ -19,6 +29,7 @@ const Songs = () => {
 
     return (
         <ScrollView>
+            <Text>{selectedPlaylist?.name}</Text>
             <Text>Welcome to Songs</Text>
             <SearchBar
                 placeholder="Test"
