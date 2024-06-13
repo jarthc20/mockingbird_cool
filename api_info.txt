@@ -1,0 +1,85 @@
+Song:
+
+- get all songs
+GET http://localhost:30000/songs/all
+returns: ISong[]
+[
+  {
+    "_id": "665c30b92d38506dbbafbaef",
+    "songName": "ich bin cool",
+    "authorName": "Adelle",
+    "src": "https",
+    "__v": 0
+  },
+  {
+    "_id": "665c30c62d38506dbbafbaf2",
+    "songName": "dwaddddddd",
+    "authorName": "delle",
+    "src": "dadwa",
+    "playlist": "665c2fce8974b6b89b1e8a1c",
+    "__v": 0
+  },
+]
+
+- Get songs by playlistId
+GET http://localhost:30000/songs/all?byPlaylist=[PLAYLIST_ID]
+returns: ISong[]
+[
+  {
+    "_id": "665c30c62d38506dbbafbaf2",
+    "songName": "dwaddddddd",
+    "authorName": "delle",
+    "src": "dadwa",
+    "playlist": "[PLAYLIST_ID]",
+    "__v": 0
+  },
+]
+
+- post new song
+POST http://localhost:30000/songs
+body: ISong
+{
+  "songName": "dwaddddddd",
+  "authorName": "delle",
+  "src": "dadwa",
+  "playlist": "665c30b92d38506dbbafbae3"
+}
+
+- add song to playlist
+POST http://localhost:30000/songs/addToPlaylist?playlist=[PLAYLIST_ID | undefinded -> removed aus playlist]
+body: ISong
+{
+  "songName": "dwaddddddd",
+  "authorName": "delle",
+  "src": "dadwa",
+  "playlist": "665c30b92d38506dbbafbae3"
+}
+
+
+Playlist
+
+- get all playlists
+GET http://localhost:30000/playlists/all
+returns: IPlaylist[]
+[
+  {
+    "_id": "665c30b92d38506dbbafbae2",
+    "name": "Hello",
+    "desc": "edd",
+    "__v": 0
+  },
+  {
+    "_id": "665c30b92d38506dbbafbae3",
+    "name": "Cool",
+    "desc": "edd",
+    "__v": 0
+  }
+]
+
+- post new playlist
+POST http://localhost:30000/playlists
+body: IPlaylist
+{
+  "name": "wdawda",
+  "desc": "edd"
+}

@@ -1,6 +1,6 @@
-
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import { IPlaylist } from '../models/IPlaylist';
+import { getAllPlaylistAPI } from "../api_access/API_Access";
 
 interface PlaylistContextProps {
     playlists: IPlaylist[] | undefined;
@@ -39,6 +39,15 @@ const PlaylistContextProvider: React.FC<PlaylistProviderProps> = ({ children }) 
     const handleSetSelectedPlaylist = (playlist: IPlaylist | undefined) => {
         setSelectedPlaylist(playlist);
     };
+
+    useEffect(() => {
+        const fetchPlaylists = async () => {
+            const fetchedPlaylists = await getAllPlaylistAPI();
+            setPlaylists(fetchedPlaylists);
+        };
+
+        fetchPlaylists();
+    }, []);
 
     return (
         <PlaylistContext.Provider

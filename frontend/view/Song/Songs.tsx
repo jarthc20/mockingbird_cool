@@ -4,38 +4,31 @@ import SongListPage from "./SongListPage";
 import {ISong, mockSongs} from "../../models/ISong";
 import {SearchBar} from "react-native-elements";
 import {usePlaylistContext} from "../../context/PlaylistContext";
+import {getAllSongsAPI} from "../../api_access/API_Access";
 
 const Songs = () => {
     const [songs, setSongs] = useState<ISong[]>(mockSongs);
     const [searchString, setSearchString] = useState<String>("");
-    const {selectedPlaylist,setSelectedPlaylist} = usePlaylistContext();
+    const {selectedPlaylist,setSelectedPlaylist, playlists} = usePlaylistContext();
 
     useEffect(() => {
-        setSelectedPlaylist({
-            "id": "1",
-            "name": "My Playlist",
-            "songs": ["Song 1", "Song 2", "Song 3"]
-        });
+        setNewSongs();
     }, []);
 
-    const updateSearch = (search: string) => {
-        setSearchString(search);
-        const filteredSongs = mockSongs.filter(song =>
-            song.songname.toLowerCase().includes(search.toLowerCase()) ||
-            song.authorname.toLowerCase().includes(search.toLowerCase())
-        );
-        setSongs(filteredSongs);
+    const setNewSongs = () => {
+        getAllSongsAPI(false)
+            .then(data => {
+                if (data) {
+                    setSongs(data);
+                }
+            });
     }
 
     return (
         <ScrollView>
             <Text>{selectedPlaylist?.name}</Text>
             <Text>Welcome to Songs</Text>
-            <SearchBar
-                placeholder="Test"
-                onChangeText={updateSearch}
-                value={searchString}
-            />
+
             <SongListPage songList={songs} />
         </ScrollView>
     );

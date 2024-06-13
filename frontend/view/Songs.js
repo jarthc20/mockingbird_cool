@@ -11,8 +11,8 @@ var Songs = function () {
     var updateSearch = function (search) {
         setSearchString(search);
         var filteredSongs = ISong_1.mockSongs.filter(function (song) {
-            return song.songname.toLowerCase().includes(search.toLowerCase()) ||
-                song.authorname.toLowerCase().includes(search.toLowerCase());
+            return song.songName.toLowerCase().includes(search.toLowerCase()) ||
+                song.authorName.toLowerCase().includes(search.toLowerCase());
         });
         setSongs(filteredSongs);
     };

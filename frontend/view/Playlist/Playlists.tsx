@@ -6,8 +6,6 @@ import PlaylistListPage from "./PlaylistListPage";
 const Playlists = () => {
     const {selectedPlaylist,setSelectedPlaylist} = usePlaylistContext();
 
-
-
     return (
         <ScrollView>
             <Text>{selectedPlaylist?.name}</Text>

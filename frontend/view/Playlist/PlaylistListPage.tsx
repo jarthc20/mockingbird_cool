@@ -1,38 +1,57 @@
-import React, {useEffect, useState} from 'react';
-import {usePlaylistContext} from "../../context/PlaylistContext";
-import {Button, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View, Modal} from "react-native";
+import React, { useEffect, useState } from 'react';
+import { usePlaylistContext } from "../../context/PlaylistContext";
+import { Button, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View, Modal } from "react-native";
 import SinglePlaylist from "./SinglePlaylist";
-import mockPlaylists from "../../models/IPlaylist";
-import {SearchBar} from "react-native-elements";
+import { SearchBar } from "react-native-elements";
+import { addPlaylistAPI, getAllPlaylistAPI } from "../../api_access/API_Access";
 
 const PlaylistListPage: React.FC = () => {
-    const {playlists, setPlaylists} = usePlaylistContext();
+    const { playlists, setPlaylists } = usePlaylistContext();
     const [searchString, setSearchString] = useState<string>("");
+    const [filteredPlaylists, setFilteredPlaylists] = useState(playlists || []);
     const [isModalVisible, setModalVisible] = useState<boolean>(false);
     const [newPlaylistName, setNewPlaylistName] = useState<string>("");
+    const [newPlaylistDescription, setNewPlaylistDescription] = useState<string>("");
 
     useEffect(() => {
-        setPlaylists(mockPlaylists);
+        getAllPlaylistAPI(false)
+            .then(data => {
+                setPlaylists(data);
+                setFilteredPlaylists(data);
+            });
     }, []);
+
+    useEffect(() => {
+        // Apply search filter whenever playlists are updated
+        if (searchString) {
+            updateSearch(searchString);
+        } else {
+            setFilteredPlaylists(playlists);
+        }
+    }, [playlists]);
 
     const updateSearch = (search: string) => {
         setSearchString(search);
-        const filteredPlaylists = mockPlaylists.filter(playlist =>
+        const filtered = playlists?.filter(playlist =>
             playlist.name.toLowerCase().includes(search.toLowerCase())
         );
-        setPlaylists(filteredPlaylists);
+        setFilteredPlaylists(filtered || []);
     };
 
     const createNewPlaylist = () => {
         if (!newPlaylistName.trim()) return;
 
         const newPlaylist = {
-            id: (playlists?.length || 0 + 1).toString(),  
-            name: newPlaylistName,
-            songs: [],
-        };
 
-        setPlaylists([...(playlists || []), newPlaylist]);
+        name: newPlaylistName,
+            desc: newPlaylistDescription
+    };
+        addPlaylistAPI(false, newPlaylist)
+            .then(() => {
+                setPlaylists([...(playlists || []), newPlaylist]);
+                setFilteredPlaylists([...(filteredPlaylists || []), newPlaylist]);
+            });
+
         setNewPlaylistName("");
         setModalVisible(false);
     };
@@ -45,11 +64,13 @@ const PlaylistListPage: React.FC = () => {
                 value={searchString}
             />
             <ScrollView>
-                {playlists?.map(playlist => (
-                    <SinglePlaylist key={playlist.id} playlist={playlist} />
+                {filteredPlaylists?.map(playlist => (
+                    <SinglePlaylist key={playlist._id} playlist={playlist} />
                 ))}
             </ScrollView>
             <Button title="Create new playlist" onPress={() => setModalVisible(true)} />
+
+
             <Modal
                 animationType="slide"
                 transparent={true}
@@ -63,6 +84,12 @@ const PlaylistListPage: React.FC = () => {
                         placeholder="Playlist Name"
                         value={newPlaylistName}
                         onChangeText={setNewPlaylistName}
+                    />
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Description"
+                        value={newPlaylistDescription}
+                        onChangeText={setNewPlaylistDescription}
                     />
                     <Button title="Add Playlist" onPress={createNewPlaylist} />
                     <Button title="Cancel" onPress={() => setModalVisible(false)} />
