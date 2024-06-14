@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {FlatList, ScrollView, Text} from "react-native";
+import {FlatList, ScrollView, StyleSheet, Text} from "react-native";
 import SongListPage from "./SongListPage";
 import {ISong, mockSongs} from "../../models/ISong";
 import {SearchBar} from "react-native-elements";
@@ -26,12 +26,19 @@ const Songs = () => {
 
     return (
         <ScrollView>
-            <Text>{selectedPlaylist?.name}</Text>
-            <Text>Welcome to Songs</Text>
+            <Text style={styles.selected}>Selected playlist: {selectedPlaylist ? selectedPlaylist.name : "No playlist selected"}</Text>
 
             <SongListPage songList={songs} />
         </ScrollView>
     );
 };
+
+const styles = StyleSheet.create({
+    selected: {
+        fontSize: 20,
+        color: '#1ED760'
+    }
+
+});
 
 export default Songs;

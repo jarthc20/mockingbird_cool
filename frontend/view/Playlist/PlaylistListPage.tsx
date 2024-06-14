@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { usePlaylistContext } from "../../context/PlaylistContext";
-import { Button, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View, Modal } from "react-native";
+import { SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View, Modal, TouchableOpacity } from "react-native";
 import SinglePlaylist from "./SinglePlaylist";
 import { SearchBar } from "react-native-elements";
 import { addPlaylistAPI, getAllPlaylistAPI } from "../../api_access/API_Access";
@@ -42,10 +42,10 @@ const PlaylistListPage: React.FC = () => {
         if (!newPlaylistName.trim()) return;
 
         const newPlaylist = {
-
-        name: newPlaylistName,
+            name: newPlaylistName,
             desc: newPlaylistDescription
-    };
+        };
+
         addPlaylistAPI(false, newPlaylist)
             .then(() => {
                 setPlaylists([...(playlists || []), newPlaylist]);
@@ -53,23 +53,25 @@ const PlaylistListPage: React.FC = () => {
             });
 
         setNewPlaylistName("");
+        setNewPlaylistDescription("");
         setModalVisible(false);
     };
 
     return (
-        <SafeAreaView>
+        <SafeAreaView style={styles.body}>
             <SearchBar
                 placeholder="Search Playlists"
                 onChangeText={updateSearch}
                 value={searchString}
             />
-            <ScrollView>
+            <ScrollView style={styles.svStyle}>
                 {filteredPlaylists?.map(playlist => (
                     <SinglePlaylist key={playlist._id} playlist={playlist} />
                 ))}
             </ScrollView>
-            <Button title="Create new playlist" onPress={() => setModalVisible(true)} />
-
+            <TouchableOpacity style={styles.blackButton} onPress={() => setModalVisible(true)}>
+                <Text style={styles.buttonText}>Create new playlist</Text>
+            </TouchableOpacity>
 
             <Modal
                 animationType="slide"
@@ -91,8 +93,12 @@ const PlaylistListPage: React.FC = () => {
                         value={newPlaylistDescription}
                         onChangeText={setNewPlaylistDescription}
                     />
-                    <Button title="Add Playlist" onPress={createNewPlaylist} />
-                    <Button title="Cancel" onPress={() => setModalVisible(false)} />
+                    <TouchableOpacity style={styles.blackButton} onPress={createNewPlaylist}>
+                        <Text style={styles.buttonText}>Add Playlist</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.blackButton} onPress={() => setModalVisible(false)}>
+                        <Text style={styles.buttonText}>Cancel</Text>
+                    </TouchableOpacity>
                 </View>
             </Modal>
         </SafeAreaView>
@@ -100,6 +106,12 @@ const PlaylistListPage: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
+    body: {
+        padding: 10
+    },
+    svStyle: {
+        //background:
+    },
     modalView: {
         margin: 20,
         backgroundColor: "white",
@@ -113,7 +125,7 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 4,
-        elevation: 5
+        elevation: 5,
     },
     modalText: {
         marginBottom: 15,
@@ -128,6 +140,17 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         paddingLeft: 10,
         width: '80%',
+    },
+    blackButton: {
+        backgroundColor: "black",
+        borderRadius: 5,
+        padding: 10,
+        marginVertical: 5,
+        alignItems: 'center'
+    },
+    buttonText: {
+        color: "white",
+        textAlign: "center"
     }
 });
 

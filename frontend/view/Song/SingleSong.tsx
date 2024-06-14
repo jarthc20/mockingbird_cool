@@ -48,7 +48,7 @@ const SingleSong: React.FC<SingleSongProps> = ({ singleSong, showAdd }) => {
             </TouchableOpacity>
             <View style={styles.info}>
                 <Text style={styles.text}>{singleSong.songName}</Text>
-                <Text style={styles.text}>{singleSong.authorName}</Text>
+                <Text style={styles.subText}>{singleSong.authorName}</Text>
             </View>
         </View>
     );
@@ -61,6 +61,9 @@ const styles = StyleSheet.create({
         padding: 10,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
+        backgroundColor: '#1ED760',
+        borderRadius: 10,
+        marginVertical: 5,
     },
     icon: {
         marginRight: 10,
@@ -70,7 +73,12 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 16,
-        color: '#333',
+        color: 'black',
+        fontWeight: 'bold',
+    },
+    subText: {
+        fontSize: 14,
+        color: 'black',
     },
 });
 

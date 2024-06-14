@@ -5,7 +5,6 @@ import { View, Text, Button, Modal, StyleSheet, TouchableOpacity, FlatList } fro
 import { usePlaylistContext } from "../../context/PlaylistContext";
 import {getSongsByPlaylistIdAPI} from "../../api_access/API_Access";
 
-
 interface SinglePlaylistProps {
     playlist: IPlaylist
 }
@@ -37,8 +36,11 @@ const SinglePlaylist: React.FC<SinglePlaylistProps> = ({ playlist }) => {
         <View>
             <View style={styles.row}>
                 <Text onPress={handleOnClick} style={styles.playlistName}>{playlist.name}</Text>
-                <Button title="Description" onPress={handleDescriptionPress} />
+                <TouchableOpacity onPress={handleDescriptionPress} style={styles.blackButton}>
+                    <Text style={styles.buttonText}>Description</Text>
+                </TouchableOpacity>
             </View>
+
             <Modal
                 animationType="slide"
                 transparent={true}
@@ -47,13 +49,12 @@ const SinglePlaylist: React.FC<SinglePlaylistProps> = ({ playlist }) => {
             >
                 <View style={styles.centeredView}>
                     <View style={styles.modalView}>
-                        <Text style={styles.modalText}>{playlist.desc}</Text>
+                        <Text style={styles.modalText}> About the playlist: <br/>{playlist.desc}</Text>
                         {loading ? (
                             <Text>Loading...</Text>
                         ) : (
                             <FlatList
                                 data={songs}
-                                //keyExtractor={item => item._id}
                                 renderItem={({ item }) => (
                                     <Text style={styles.songItem}>{item.songName} by {item.authorName}</Text>
                                 )}
@@ -78,6 +79,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: 10,
+        backgroundColor: '#1ED760',
+        margin: 10,
+        display: "flex",
+        gap: 5,
+        borderRadius: 10
     },
     playlistName: {
         flex: 1,
@@ -107,12 +113,21 @@ const styles = StyleSheet.create({
         width: '80%',
         maxHeight: '80%'
     },
+    blackButton: {
+        backgroundColor: "black",
+        borderRadius: 5,
+        padding: 10,
+    },
+    buttonText: {
+        color: "white",
+        textAlign: "center"
+    },
     closeButton: {
-        backgroundColor: "#2196F3",
+        backgroundColor: "black",
         borderRadius: 20,
         padding: 10,
         elevation: 2,
-        marginTop: 15
+        marginTop: 15,
     },
     textStyle: {
         color: "white",

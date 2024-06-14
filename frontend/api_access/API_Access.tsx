@@ -40,7 +40,7 @@ export const getAllPlaylistAPI = async (cancel = false, param?: string) => {
 export const addPlaylistAPI = async (cancel = false, playlist: ICreatePlaylist) => {
     try {
         const config = { cancelToken: createCancelToken(cancel) };
-        const response = await axios.post<IPlaylist>(`${PLAYLIST_URL}/post`, playlist, config);
+        const response = await axios.post<IPlaylist>(`${PLAYLIST_URL}/`, playlist, config);
         return response.data;
     } catch (error) {
         handleCancelError(error);
