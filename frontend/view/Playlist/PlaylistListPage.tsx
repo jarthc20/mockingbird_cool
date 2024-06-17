@@ -55,6 +55,7 @@ const PlaylistListPage: React.FC = () => {
         setNewPlaylistName("");
         setNewPlaylistDescription("");
         setModalVisible(false);
+        alert("Please reload if you want to add songs to your new playlist "+ newPlaylist);
     };
 
     return (
