@@ -1,6 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { usePlaylistContext } from "../../context/PlaylistContext";
-import { SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View, Modal, TouchableOpacity } from "react-native";
+import {
+    SafeAreaView,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TextInput,
+    View,
+    Modal,
+    TouchableOpacity,
+    Alert
+} from "react-native";
 import SinglePlaylist from "./SinglePlaylist";
 import { SearchBar } from "react-native-elements";
 import { addPlaylistAPI, getAllPlaylistAPI } from "../../api_access/API_Access";
@@ -55,7 +65,7 @@ const PlaylistListPage: React.FC = () => {
         setNewPlaylistName("");
         setNewPlaylistDescription("");
         setModalVisible(false);
-        alert("Please reload if you want to add songs to your new playlist "+ newPlaylist);
+        Alert.alert("Please reload if you want to add songs to your new playlist "+ newPlaylist);
     };
 
     return (
