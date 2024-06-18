@@ -4,71 +4,66 @@ import {IPlaylist} from "../src/common/IPlaylist";
 
 export const mockdataSongs: ISong[] = [
     {
-        "songName": "Hello",
-        "authorName": "Adelle",
-        "src":"https",
+        "songName": "Viva La Vida",
+        "authorName": "Coldplay",
+        "src":"https://open.spotify.com/track/3Fcfwhm8oRrBvBZ8KGhtea?si=37ee41f23d6c46b9",
         "playlist":undefined,
     },
     {
-        "songName": "Cool",
-        "authorName": "test",
-        "src":"https",
+        "songName": "Zombie",
+        "authorName": "The Cranberries",
+        "src":"https://open.spotify.com/track/7EZC6E7UjZe63f1jRmkWxt?si=eb4fbaf2907342ca",
         "playlist":undefined,
     }, {
-        "songName": "Cool2",
-        "authorName": "teste",
-        "src":"https",
+        "songName": "Vermissen",
+        "authorName": "Juju, Henning May",
+        "src":"https://open.spotify.com/track/07f2b3CTdgKKlhv0mqUksz?si=5d13a55ee8304a72",
         "playlist":undefined,
     }, {
-        "songName": "Cool3",
-        "authorName": "teest",
-        "src":"https",
+        "songName": "Title",
+        "authorName": "Meghan Trainor",
+        "src":"https://open.spotify.com/track/18IwlUCETTJSrS0fYkZGEo?si=50bf5f9f989b491a",
         "playlist":undefined,
     }, {
-        "songName": "Cool4",
-        "authorName": "delle",
-        "src":"https",
+        "songName": "Half A Man",
+        "authorName": "Dean Lewis",
+        "src":"https://open.spotify.com/track/1ugQtcwmKOXvKAYzhjncmv?si=0852bdf85a7e40c2",
         "playlist":undefined,
     }, {
-        "songName": "wdaw",
-        "authorName": "wdawdwd",
-        "src":"https",
+        "songName": "treehouse",
+        "authorName": "kelseydog",
+        "src":"https://open.spotify.com/track/3JjeDncA2YwQXSuiTpfiEs?si=508f2ab9aeb74ede",
         "playlist":undefined,
     }, {
-        "songName": "adddddd",
-        "authorName": "coool",
-        "src":"https",
+        "songName": "Roadtrip",
+        "authorName": "Dream",
+        "src":"https://open.spotify.com/track/4Agtk2MrapdZAVN7v6PuFO?si=3b83947222a24b53",
         "playlist":undefined,
     }, {
-        "songName": "ddwad",
-        "authorName": "Adelle",
-        "src":"https",
+        "songName": "JUST LIKE YOU",
+        "authorName": "NF",
+        "src":"https://open.spotify.com/track/7tTRFVlFzk6yTnoMcParmi?si=10bc8bda1da44d4a",
         "playlist":undefined,
     }, {
-        "songName": "wadddddd",
-        "authorName": "Adelle",
-        "src":"https",
+        "songName": "Devil doesnt Bargain",
+        "authorName": "Alec Benjamin",
+        "src":"https://open.spotify.com/track/1zu2GKHPJIsUu80SUJX4H4?si=71ad42ff6cb44437",
         "playlist":undefined,
     }, {
-        "songName": "wat is sis",
-        "authorName": "Adelle",
-        "src":"https",
-        "playlist":undefined,
-    }, {
-        "songName": "ich bin cool",
-        "authorName": "Adelle",
-        "src":"https",
+        "songName": "Big City Life",
+        "authorName": "Luude",
+        "src":"https://open.spotify.com/track/1LIvdWNdKmHvU0FJvw2diN?si=a8d44f5ca3884473",
         "playlist":undefined,
     }
 ]
 
 export const mockdataPlaylist: IPlaylist[] = [
     {
-        "name": "Hello",
-        "desc":"edd"
+        "name": "Playlist 1",
+        "desc":"Cool"
     },
     {
-        "name": "Cool",
-        "desc":"edd"
+        "name": "Playlist 2",
+        "desc":"cooler"
     },
 ]
