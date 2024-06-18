@@ -27,4 +27,4 @@ Content-Type: application/json
 }
 
 ###daad####
-GET http://localhost:30000/songs/all?byPlaylist=665c30b92d38506dbbafbae3
+GET http://localhost:30000/songs/all?byPlaylist=6671cfe06047d3af4058b21b
