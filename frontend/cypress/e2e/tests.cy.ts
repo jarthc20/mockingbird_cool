@@ -13,11 +13,6 @@ describe('Playlist List Page', () => {
     });
 
 
-    it('should navigate to Songs screen', () => {
-        cy.contains('Songs').click();
-
-        cy.contains('Search Songs').should('exist');
-    });
 
 
     describe('Home Page', () => {
@@ -27,6 +22,13 @@ describe('Playlist List Page', () => {
 
         it('should display the welcome text', () => {
             cy.contains('Welcome to Mockingbird').should('be.visible');
+        });
+
+
+        it('should navigate to Songs screen', () => {
+            cy.contains('Songs').click();
+
+            cy.contains('Search Songs').should('exist');
         });
 
 
