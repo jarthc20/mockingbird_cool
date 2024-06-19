@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import {View, Text, StyleSheet, TouchableOpacity, Linking} from "react-native";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { ISong } from "../../models/ISong";
 import { usePlaylistContext } from "../../context/PlaylistContext";
+import {useNavigation} from "@react-navigation/native";
+import songs from "./Songs";
 
 interface SingleSongProps {
     singleSong: ISong;
@@ -12,6 +14,8 @@ interface SingleSongProps {
 const SingleSong: React.FC<SingleSongProps> = ({ singleSong, showAdd }) => {
     const { selectedPlaylist } = usePlaylistContext();
     const [isInPlaylist, setIsInPlaylist] = useState<boolean>(false);
+    const navigation = useNavigation();
+
 
     useEffect(() => {
         if (selectedPlaylist) {
@@ -25,19 +29,24 @@ const SingleSong: React.FC<SingleSongProps> = ({ singleSong, showAdd }) => {
         if (!selectedPlaylist || !selectedPlaylist._id) return;
 
         if (isInPlaylist) {
-            // Assuming there is an API or state management function to remove the song from the playlist
-            // For example: updateSongPlaylist(singleSong._id, null);
-            singleSong.playlist = undefined; // You will likely have to update this in your actual data store
+
+            singleSong.playlist = undefined;
         } else {
-            // Assuming there is an API or state management function to add the song to the playlist
-            // For example: updateSongPlaylist(singleSong._id, selectedPlaylist._id);
-            singleSong.playlist = selectedPlaylist._id; // You will likely have to update this in your actual data store
+
+            singleSong.playlist = selectedPlaylist._id;
         }
 
         setIsInPlaylist(!isInPlaylist);
     };
 
+    const handleClickOnSong = () => {
+        if (singleSong.src) {
+            Linking.openURL(singleSong.src).catch(err => console.error("Couldn't load page", err));
+        }
+    }
+
     return (
+        <TouchableOpacity onPress={handleClickOnSong}>
         <View style={styles.container}>
             <TouchableOpacity onPress={handleOnClick}>
                 {isInPlaylist ? (
@@ -51,6 +60,7 @@ const SingleSong: React.FC<SingleSongProps> = ({ singleSong, showAdd }) => {
                 <Text style={styles.subText}>{singleSong.authorName}</Text>
             </View>
         </View>
+        </TouchableOpacity>
     );
 };
 
